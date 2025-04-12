@@ -1,0 +1,194 @@
+:root {
+    /* success */
+    --i-toast-success-bgColor: #C5F3D7;
+    --i-toast-success-font-bgColor: #23AC60;
+    --i-toast-success-icon-bgColor: #95eab9;
+
+    /* error */
+    --i-toast-error-bgColor: #FFE1E3;
+    --i-toast-error-font-bgColor: #ac3123;
+    --i-toast-error-icon-bgColor: #ea9595;
+
+    /* warn */
+    --i-toast-warn-bgColor: #FEDA9C;
+    --i-toast-warn-font-bgColor: #CD8701;
+    --i-toast-warn-icon-bgColor: #FFD080;
+
+    /* info */
+    --i-toast-info-bgColor: #D6F0FD;
+    --i-toast-info-font-bgColor: #3EB5FD;
+    --i-toast-info-icon-bgColor: #98D7FE;
+}
+
+.i-toasts {
+    width: 425px;
+    max-width: calc(100% - 30px);
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1101;
+}
+
+.i-toast {
+    gap: 10px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 5px;
+    align-items: center;
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    animation: animated-i-toast 0.2s 4s forwards linear !important;
+
+    & i {
+        font-size: 22px;
+    }
+
+    & .fa-xmark {
+        width: 35px;
+        height: 100%;
+        cursor: pointer;
+        position: absolute;
+        text-align: center;
+        /* align-content: center; */
+        top: 0;
+        right: 0;
+        padding-top: 10px;
+    }
+
+    &.closed:hover,
+    &.closed {
+        z-index: -1;
+        animation-play-state: running !important;
+        animation: closed-i-toast 0.2s forwards linear !important;
+    }
+
+    &::after {
+        width: 7px;
+        height: 100%;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &>div {
+        flex: 1;
+        display: flex;
+        /* font-size: 14px; */
+        position: relative;
+        padding: 10px 40px 15px 15px;
+
+        &>i {
+            padding-inline-end: 7px;
+        }
+
+        &::before {
+            content: '';
+            width: 100%;
+            height: 5px;
+            left: 0;
+            bottom: 0;
+            position: absolute;
+            animation: progress-i-toast 5s forwards ease-out;
+            animation-play-state: running;
+        }
+    }
+
+    & * {
+        color: inherit !important;
+    }
+
+    &>div::before,
+    &::after,
+    & .fa-xmark {
+        background-color: inherit;
+    }
+
+    &.i-toast-success {
+        background-color: var(--i-toast-success-bgColor);
+        color: var(--i-toast-success-font-bgColor);
+    }
+
+    &.i-toast-success>div::before,
+    &.i-toast-success::after {
+        background-color: var(--i-toast-success-font-bgColor);
+    }
+
+    &.i-toast-success .fa-xmark {
+        background-color: var(--i-toast-success-icon-bgColor);
+    }
+
+    &.i-toast-error {
+        background-color: var(--i-toast-error-bgColor);
+        color: var(--i-toast-error-font-bgColor);
+    }
+
+    &.i-toast-error>div::before,
+    &.i-toast-error::after {
+        background-color: var(--i-toast-error-font-bgColor);
+    }
+
+    &.i-toast-error .fa-xmark {
+        background-color: var(--i-toast-error-icon-bgColor);
+    }
+
+    &.i-toast-warn {
+        background-color: var(--i-toast-warn-bgColor);
+        color: var(--i-toast-warn-font-bgColor);
+    }
+
+    &.i-toast-warn>div::before,
+    &.i-toast-warn::after {
+        background-color: var(--i-toast-warn-font-bgColor);
+    }
+
+    &.i-toast-warn .fa-xmark {
+        background-color: var(--i-toast-warn-icon-bgColor);
+    }
+
+    &.i-toast-info {
+        background-color: var(--i-toast-info-bgColor);
+        color: var(--i-toast-info-font-bgColor);
+    }
+
+    &.i-toast-info>div::before,
+    &.i-toast-info::after {
+        background-color: var(--i-toast-info-font-bgColor);
+    }
+
+    &.i-toast-info .fa-xmark {
+        background-color: var(--i-toast-info-icon-bgColor);
+    }
+
+    &:hover,
+    &:hover>div::before {
+        animation-play-state: paused !important;
+    }
+}
+
+@keyframes animated-i-toast {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-150%);
+    }
+}
+
+@keyframes closed-i-toast {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-150%);
+    }
+}
+
+@keyframes progress-i-toast {
+    100% {
+        width: 0;
+    }
+}
